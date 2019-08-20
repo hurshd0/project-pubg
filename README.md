@@ -9,16 +9,65 @@
     - [ ] Baseline Linear Regression model
     - [ ] Baseline Random Forest Regression model
     - [ ] Get Plot feature importances, permutation importances    
-- [ ] **Phase 2:** Redo - EXPLORE, MODEL, EVALUATE 
+- [ ] **Phase 2:** Redo - EXPLORE, MODEL, EVALUATE 🔄
 - [ ] **Phase 3:** Get MVP out  
 
-### So, where we droppin' boys and girls?
+---
+
+### So, where we droppin' boys and girls? 
 PUBG or Player Unknown Battlegrounds is a battle-royale style game where at the beginning of the play, nearly 100 people parachute onto an island without any equipment. In order to win the game, you need to scavenge for weapons and available equipment to eliminate the other people and survive to the end. The game also restricts player in Hunger Game style by reducing the playable are in map after a some amount of fixed time is passed. 
 
 ![](https://d.newsweek.com/en/full/854048/pubg-logo.jpg)
+
+---
 
 ### Objective
 
 **Defining the problem:** The problem we have is, there is not set guide or strategy to improve player performance in PUBG, should your play style be stealth like a ninja and sneak upon unsuspecting players, or by camping in one spot and hide your way into victory, or snipe like assassin, or do you need to be aggressive and play like Rambo? 
 
 **Solution:** Is to create a web application that allows players to improve their strategy by considering *What-if* scenarios as MVP.
+
+---
+
+### 💻⌨️ USAGE 🎮🕹️
+
+#### I. Setup
+
+1. If you don't have [Pipenv](https://pipenv.readthedocs.io/en/latest/) virtual environment manager, do
+
+`pip install pipenv`
+
+2. Clone the repo onto your local computer
+
+`https://github.com/hurshd0/project-pubg.git`
+
+3. Create a virtual environment for this project, and install dependencies from Pipfile
+`pipenv install`
+
+4. Activate the `Pipenv shell`
+
+`pipenv shell`
+
+You can verify the virtual environment is active:
+
+- Look at your command prompt prefix
+- Run the command `which jupyter`
+
+You should see this:
+```
+(your-repo-name) $ which jupyter
+/Users/you/.local/share/virtualenvs/your-repo-name/bin/jupyter
+```
+
+#### II. Run the app
+
+`python run.py`
+
+Then in your browser, go to: http://localhost:8050/
+
+`Ctrl + C` quits the app.
+
+
+
+
+
