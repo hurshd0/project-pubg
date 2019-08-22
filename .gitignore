@@ -110,3 +110,4 @@ data/project-pubg/
 
 # ignore config files
 pubg-api/config.py
+pubg-api/__pycache__
