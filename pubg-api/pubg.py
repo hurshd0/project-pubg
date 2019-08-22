@@ -19,7 +19,7 @@ def _base_url(path):
 
 def _platform_url(platform=None):
     if platform is None:
-        raise ValueError('Parameter `platform` must be non-nil reference')
+        return _base_url('steam')
     return _base_url(platform)
 
 def _fetch(url):
@@ -70,7 +70,7 @@ def get_content(url=None, verbose=True):
             pass
     return resp_json
 
-def get_match_samples(platform='steam', verbose=True):
+def get_match_samples(platform=None, verbose=True):
     # Make platform API endpoint
     url = _platform_url(platform)
     url += '/samples'
@@ -82,7 +82,7 @@ def get_match_samples(platform='steam', verbose=True):
         print(f'Found {len(matches)} number of matches')
     return pd.Series([match['id'] for match in matches], name='match_id')
 
-def get_match_stats(matches=None):
+def get_match_stats(matches=None, platform=None):
     # Verify the parameter is passed
     if matches is None:
         raise ValueError('You forgot to pass parameter `matches`')
@@ -90,7 +90,7 @@ def get_match_stats(matches=None):
         raise TypeError('Wrong data type!, parameter `matches` should be a Pandas Series data type')
 
     # Setup match endpoint
-    url = _platform_url()
+    url = _platform_url(platform)
     url += '/matches/'
     
     # Convert matches to python list
@@ -134,15 +134,15 @@ def get_match_stats(matches=None):
 def save_data_frame(df=None, filename=None):
     try:
         df.to_csv(filename, index=False)
-    except as e:
+    except Exception as e:
         print("Data Frame couldn't be saved: ", sys.exc_info()[0])
         raise
 
-matches = get_match_samples()
-print(matches.head())
+# matches = get_match_samples()
+# print(matches.head())
 
 
-df = get_match_stats(matches)
-print(df.head())
+# df = get_match_stats(matches)
+# print(df.head())
 
-save_data_frame(df, 'pubg_stats')
+# save_data_frame(df, 'pubg_stats.csv')
