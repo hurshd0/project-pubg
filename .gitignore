@@ -107,3 +107,6 @@ venv.bak/
 
 # ignore large dataset
 data/project-pubg/
+
+# ignore config files
+pubg-api/config.py
