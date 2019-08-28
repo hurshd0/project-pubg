@@ -106,6 +106,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# ignore config files
+pubg/config.py
+
 # ignore large dataset
 data/project-pubg/
 
