@@ -73,6 +73,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+notebooks/.ipynb_checkpoints
 
 # pyenv
 .python-version
@@ -111,3 +112,8 @@ data/project-pubg/
 # ignore config files
 pubg-api/config.py
 pubg-api/__pycache__
+
+# ignore dirty data
+datasets/dirty-data
+datasets/clean-data/raw_df.csv
+

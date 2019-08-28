@@ -55,4 +55,4 @@ meta_tags=[
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets, meta_tags=meta_tags)
 app.config.suppress_callback_exceptions = True
 app.title = 'YOUR APP NAME' # appears in browser title bar
-server = app.server
+server = app.server 
