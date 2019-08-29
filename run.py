@@ -26,17 +26,20 @@ sticky (string, optional): Stick the navbar to the top or the bottom of the view
 """
 
 navbar = dbc.NavbarSimple(
-    brand='YOUR APP NAME',
-    brand_href='/', 
+    brand='PUBG Predictor',
+    brand_href='/',
     children=[
-        dbc.NavItem(dcc.Link('Predictions', href='/predictions', className='nav-link')), 
-        dbc.NavItem(dcc.Link('Insights', href='/insights', className='nav-link')), 
-        dbc.NavItem(dcc.Link('Process', href='/process', className='nav-link')), 
+        dbc.NavItem(
+            dcc.Link('Predictions', href='/predictions', className='nav-link')),
+        dbc.NavItem(
+            dcc.Link('Insights', href='/insights', className='nav-link')),
+        dbc.NavItem(dcc.Link('Process', href='/process', className='nav-link')),
     ],
     sticky='top',
-    color='light', 
-    light=True, 
-    dark=False
+    color='#272B30',
+    dark=True,
+    light=False
+
 )
 
 footer = dbc.Container(
@@ -44,27 +47,31 @@ footer = dbc.Container(
         dbc.Col(
             html.P(
                 [
-                    html.Span('Your Name', className='mr-2'), 
-                    html.A(html.I(className='fas fa-envelope-square mr-1'), href='mailto:<you>@<provider>.com'), 
-                    html.A(html.I(className='fab fa-github-square mr-1'), href='https://github.com/<you>/<repo>'), 
-                    html.A(html.I(className='fab fa-linkedin mr-1'), href='https://www.linkedin.com/in/<you>/'), 
-                    html.A(html.I(className='fab fa-twitter-square mr-1'), href='https://twitter.com/<you>'), 
-                ], 
+                    html.Span('Harsh Desai', className='mr-2'),
+                    html.A(html.I(className='fas fa-envelope-square mr-1'),
+                           href='mailto:hurshd0@gmail.com'),
+                    html.A(html.I(className='fab fa-github-square mr-1'),
+                           href='https://github.com/hurshd0/project-pubg'),
+                    html.A(html.I(className='fab fa-linkedin mr-1'),
+                           href='https://www.linkedin.com/in/<you>/'),
+                    html.A(html.I(className='fab fa-twitter-square mr-1'),
+                           href='https://twitter.com/hurshd0'),
+                ],
                 className='lead'
             )
         )
     )
 )
 
-# For more explanation, see: 
+# For more explanation, see:
 # Plotly Dash User Guide, URL Routing and Multiple Apps
 # https://dash.plot.ly/urls
 
 app.layout = html.Div([
-    dcc.Location(id='url', refresh=False), 
-    navbar, 
-    dbc.Container(id='page-content', className='mt-4'), 
-    html.Hr(), 
+    dcc.Location(id='url', refresh=False),
+    navbar,
+    dbc.Container(id='page-content', className='mt-4'),
+    html.Hr(),
     footer
 ])
 
@@ -82,8 +89,6 @@ def display_page(pathname):
     else:
         return dcc.Markdown('## Page not found')
 
+
 if __name__ == '__main__':
-    app.run_server(debug=True)
-
-
-    
+    app.run_server(host='0.0.0.0', port=8050, debug=True)

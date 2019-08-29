@@ -27,31 +27,30 @@ the content.
 column1 = dbc.Col(
     [
         dcc.Markdown(
-            """
-        
-            ## Value Proposition
+            """        
+            ### So, Boys and Girls? 🤖💣💥🔫🤖
 
-            Emphasize how the app will benefit users. Don't emphasize the underlying technology.
+            Battle Royale-style video games have taken the world by storm. At the beginning of the play, nearly 100 people parachute onto an island without any equipment. In order to win the game, you need to scavenge for weapons and available equipment to eliminate the other people and survive to the end. The game also restricts player in Hunger Game style by reducing the playable are in map after a some amount of fixed time is passed.
+            
+            [PlayerUnknown's BattleGrounds (PUBG)](https://www.pubg.com/) has enjoyed massive popularity. With over 50 million copies sold, it's the fifth best selling game of all time, and has millions of active monthly players.
 
-            ✅ RUN is a running app that adapts to your fitness levels and designs personalized workouts to help you improve your running.
-
-            ❌ RUN is the only intelligent running app that uses sophisticated deep neural net machine learning to make your run smarter because we believe in ML driven workouts.
+            The team at PUBG has made official game data available for the public using [REST API gateways](https://developer.pubg.com/). 
 
             """
         ),
-        dcc.Link(dbc.Button('Call To Action', color='primary'), href='/predictions')
+        dcc.Link(dbc.Button('Call To Action', color='warning'),
+                 href='/predictions')
     ],
-    md=4,
+    md=6
 )
 
-gapminder = px.data.gapminder()
-fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-           hover_name="country", log_x=True, size_max=60)
 
 column2 = dbc.Col(
     [
-        dcc.Graph(figure=fig),
-    ]
+        html.Img(src='assets/pubg-image.jpg', className='img-fluid')
+    ],
+    md=6
 )
+
 
 layout = dbc.Row([column1, column2])

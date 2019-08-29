@@ -1,22 +1,24 @@
 import pandas as pd
 import numpy as np
-import os, sys
+import os
+import sys
+
 
 def reduce_mem_usage(df, verbose=True):
     """ Function iterates through all the columns of a dataframe and modify the data type
         to reduce memory usage.
-        
+
         Credit to: https://www.kaggle.com/gemartin/load-data-reduce-memory-usage
-        
+
         Parameters
         ----------
         df : Pandas DataFrame
         verbose: (True) by default, prints out before and after memory usage
-        
+
         Returns
         -------
         df : Reduced Memory Pandas DataFrame
-        
+
     """
 
     if verbose:
@@ -70,10 +72,11 @@ def load_dataset(file_path, verbose=True):
         ''')
     return df
 
+
 def save_data_frame(df=None, filename=None):
     """
     Saves data frame to csv format
-    
+
     Parameters
     ----------
     df: Pandas DataFrame

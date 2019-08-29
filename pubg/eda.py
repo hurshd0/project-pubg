@@ -11,6 +11,7 @@ from sklearn.utils.multiclass import unique_labels
 from sklearn.feature_selection import f_regression, SelectKBest, f_classif
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
+
 def correlations(data, y, xs):
     """
     Computes Pearsons and Spearman correlation coefficient.
@@ -27,14 +28,15 @@ def correlations(data, y, xs):
         raise ValueError(
             "The parameter 'data' must be assigned a non-nil reference to a Pandas DataFrame")
     if (y is None) or (xs is None):
-        raise ValueError("The parameter `y` or `xs` has to be non-nil reference")
+        raise ValueError(
+            "The parameter `y` or `xs` has to be non-nil reference")
     if not isinstance(data, pd.DataFrame):
         raise ValueError("`data` - has to be Pandas DataFrame object")
-    if not isinstrance(y, str):
+    if not isinstance(y, str):
         raise ValueError("`data` - has to be Python string object")
-    if not isinstrance(xs, list):
-        raise ValueError("`xs` - has to be Python list object")    
-    
+    if not isinstance(xs, list):
+        raise ValueError("`xs` - has to be Python list object")
+
     rs = []
     rhos = []
     for x in xs:
@@ -45,11 +47,10 @@ def correlations(data, y, xs):
     return pd.DataFrame({"feature": xs, "r": rs, "rho": rhos})
 
 
-
 def hist_plot(df, col_name, title=None, xlabel=None, ylabel='Density'):
     """
     Plot's histogram
-    
+
     Parameters
     ----------
     df : Pandas Data Frame
@@ -58,22 +59,22 @@ def hist_plot(df, col_name, title=None, xlabel=None, ylabel='Density'):
     xlabel : X-axis label
     ylabel : Y-axis label
     """
-    fig = plt.figure(figsize=(10, 6)) # define plot area
-    ax = fig.add_subplot(111) # add single subplot
-    sns.distplot(df[col_name], ax=ax) # Use seaborn plot
+    fig = plt.figure(figsize=(10, 6))  # define plot area
+    ax = fig.add_subplot(111)  # add single subplot
+    sns.distplot(df[col_name], ax=ax)  # Use seaborn plot
     if not title:
         title = 'Histogram of {}'.format(col_name)
-    ax.set_title(title) # Give the plot a main title
+    ax.set_title(title)  # Give the plot a main title
     if not xlabel:
         xlabel = col_name
-    ax.set_xlabel(xlabel) # Set text for the x axis
-    ax.set_ylabel(ylabel)# Set text for y axis
-    
-    
+    ax.set_xlabel(xlabel)  # Set text for the x axis
+    ax.set_ylabel(ylabel)  # Set text for y axis
+
+
 def box_plot(df, col_name, title=None, xlabel=None):
     """
     Draw's a single horizontal boxplot
-    
+
     Parameters
     ----------
     df : Pandas Data Frame
@@ -82,20 +83,21 @@ def box_plot(df, col_name, title=None, xlabel=None):
     xlabel : X-axis label
     ylabel : Y-axis label
     """
-    fig = plt.figure(figsize=(10, 6)) # define plot area
-    ax = fig.add_subplot(111) # add single subplot
-    sns.boxplot(df[col_name], ax=ax) # Use seaborn plot
+    fig = plt.figure(figsize=(10, 6))  # define plot area
+    ax = fig.add_subplot(111)  # add single subplot
+    sns.boxplot(df[col_name], ax=ax)  # Use seaborn plot
     if not title:
         title = 'Boxplot of {}'.format(col_name)
-    ax.set_title(title) # Give the plot a main title
+    ax.set_title(title)  # Give the plot a main title
     if not xlabel:
         xlabel = col_name
-    ax.set_xlabel(xlabel) # Set text for the x axis
+    ax.set_xlabel(xlabel)  # Set text for the x axis
+
 
 def bar_plot(df, col_name, title=None, xlabel=None, ylabel='Count'):
     """
     Draw's a single bar plot
-    
+
     Parameters
     ----------
     df : Pandas Data Frame
@@ -104,16 +106,18 @@ def bar_plot(df, col_name, title=None, xlabel=None, ylabel='Count'):
     xlabel : X-axis label
     ylabel : Y-axis label
     """
-    fig = plt.figure(figsize=(10, 6)) # define plot area
-    ax = fig.add_subplot(111) # add single subplot
-    ax = df[col_name].value_counts().plot.bar(color='steelblue') # Use pandas bar plot
+    fig = plt.figure(figsize=(10, 6))  # define plot area
+    ax = fig.add_subplot(111)  # add single subplot
+    ax = df[col_name].value_counts().plot.bar(
+        color='steelblue')  # Use pandas bar plot
     if not title:
         title = 'Barplot of {}'.format(col_name)
-    ax.set_title(title) # Give the plot a main title
+    ax.set_title(title)  # Give the plot a main title
     if not xlabel:
         xlabel = f'No. of {col_name}'
-    ax.set_xlabel(xlabel) # Set text for the x axis
-    ax.set_ylabel(ylabel) # Set text for the y axis
+    ax.set_xlabel(xlabel)  # Set text for the x axis
+    ax.set_ylabel(ylabel)  # Set text for the y axis
+
 
 def get_categorical_columns(df, min_card=None, max_card=None):
     """
@@ -129,14 +133,16 @@ def get_categorical_columns(df, min_card=None, max_card=None):
     """
     if df is None:
         raise ValueError(
-            "The parameter 'df' must be assigned a non-nil reference to a Pandas DataFrame")  
-    cat_cols = df.select_dtypes(include=['category', 'object']).columns.tolist()
+            "The parameter 'df' must be assigned a non-nil reference to a Pandas DataFrame")
+    cat_cols = df.select_dtypes(
+        include=['category', 'object']).columns.tolist()
     if min_card and (max_card is None):
         cat_cols = [col for col in cat_cols if df[col].nunique() >= min_card]
     elif max_card and (min_card is None):
         cat_cols = [col for col in cat_cols if df[col].nunique() <= max_card]
     elif min_card and max_card:
-        cat_cols = [col for col in cat_cols if (df[col].nunique() >= min_card) and (df[col].nunique() <= max_card)]
+        cat_cols = [col for col in cat_cols if (
+            df[col].nunique() >= min_card) and (df[col].nunique() <= max_card)]
     return cat_cols
 
 
@@ -159,7 +165,7 @@ def get_numeric_columns(df):
 def plot_numerical_columns_reg(df, target_col, alpha=0.5, color='grey'):
     """
     Plots numerical features vs. numerical target
-    
+
     Parameters
     ----------
     df : Pandas Dataframe
@@ -173,11 +179,12 @@ def plot_numerical_columns_reg(df, target_col, alpha=0.5, color='grey'):
             plt.title(f'{target_col} vs. {col}')
             plt.show()
             plt.close()
-    
+
+
 def plot_categorical_reg(df, target_col, min_card=2, max_card=12, height=5, ascpect=2, rotation=45, color='grey', kind='bar'):
     """
     Plots categorical features vs. numerical target
-    
+
     Parameters
     ----------
     df: Pandas Dataframe
@@ -194,6 +201,7 @@ def plot_categorical_reg(df, target_col, min_card=2, max_card=12, height=5, ascp
             plt.title(f'{target_col} vs. {col}')
             plt.show()
             plt.close()
+
 
 def plot_correlation_heatmap(data=None, vmax=1, annot=True, corr_type='pearson', figsize=(12, 12)):
     """
@@ -217,6 +225,7 @@ def plot_correlation_heatmap(data=None, vmax=1, annot=True, corr_type='pearson',
     plt.show()
     plt.close()
 
+
 def joint_plot(df, col_name1, col_name2, title=None, alpha=0.75):
     """
     Draws joint plot
@@ -228,11 +237,13 @@ def joint_plot(df, col_name1, col_name2, title=None, alpha=0.75):
     plt.show()
     plt.close()
 
+
 def get_quantiles(df, cols):
     """
     Returns quantiles 1%, 25, 50, 75, 95 and 99%
     """
     return df[cols].quantile(q=[.01, .25, .5, .75, .95, .99]).to_frame()
+
 
 def get_leq_quantile(df, col, q):
     """
@@ -240,11 +251,13 @@ def get_leq_quantile(df, col, q):
     """
     return df[(df[col] <= df[col].quantile(q=q))].to_frame()
 
+
 def get_geq_quantile(df, col, q):
     """
     Returns values greater than or equal to passed quantile
     """
     return df[(df[col] >= df[col].quantile(q=q))].to_frame()
+
 
 def get_between_quantiles(df, col, qs):
     """
@@ -253,6 +266,7 @@ def get_between_quantiles(df, col, qs):
     lower_q = min(qs)
     upper_q = max(qs)
     return df[(df[col] >= df[col].quantile(q=lower_q)) & (df[col] <= df[col].quantile(q=upper_q))].to_frame()
+
 
 def lowess_scatter(data, x, y, jitter=0.0, skip_lowess=False):
     if skip_lowess:
@@ -285,6 +299,7 @@ def lowess_scatter(data, x, y, jitter=0.0, skip_lowess=False):
     plt.show()
     plt.close()
 
+
 def plot_scatter_by_groups(df, x_col, y_col, group_by_col, colors=None, alpha=0.75):
     labels = df[group_by_col].unique()
     num_labels = np.arange(1, len(labels)+1)
@@ -300,6 +315,7 @@ def plot_scatter_by_groups(df, x_col, y_col, group_by_col, colors=None, alpha=0.
     plt.show()
     plt.close()
 
+
 def subset_features(train, val, test, features, target):
     X_train = train[features]
     y_train = train[target]
@@ -312,9 +328,181 @@ def subset_features(train, val, test, features, target):
         y_test = None
     return X_train, X_val, X_test, y_train, y_val, y_test
 
+
 def print_shape(train, val, test=None, title='Train/Val'):
     print('------- SHAPE - {} ---------'.format(title))
     print(f'Training Set: {train.shape}')
     print(f'Validation Set: {val.shape}')
     if test is not None:
         print(f'Testing Set: {test.shape}')
+
+
+def train_validate_test_split(df, train_percent=.6, validate_percent=.2, seed=42):
+    from sklearn.model_selection import train_test_split
+    """
+    Function does 3-Way hold out splot of Train, Validate, Test
+    """
+    train, test = train_test_split(df, test_size=0.2, random_state=seed)
+    train, validate = train_test_split(
+        train, test_size=0.25, random_state=seed)
+    return (train, validate, test)
+
+
+def get_rmse_mae_r2(y_true, y_pred, verbose=False, title='TEST'):
+    """
+    Returns regression metrics like - R^2, MSE, RMSE, and MAE as dictionary,
+    and prints them out if verbose is set to True.
+    Parameters
+    ----------
+    y_true : Python list or numpy 1D array
+    y_pred : Python list or numpy 1D array
+    Returns
+    -------
+    results : Python dictionary
+    """
+    if (y_true is None) or (y_pred is None):
+        raise ValueError(
+            'Parameters `y_true` and `y_pred` must be a non-nil reference to python list or numpy arrary')
+
+    assert y_true.shape == y_pred.shape
+    # Results dict
+    results = {}
+    mae_ = mean_absolute_error(y_true, y_pred)
+    mse_ = mean_squared_error(y_true, y_pred)
+    rmse_ = np.sqrt(mse_)
+    r_square_ = r2_score(y_true, y_pred)
+    # Store scores
+    results['R_SQUARE'] = r_square_
+    results['MAE'] = mae_
+    results['MSE'] = mse_
+    results['RMSE'] = rmse_
+    if verbose:
+        print(f'-------- {title} SET --------')
+        print(f'R^2: {r_square_:.4f}')
+        print(f'MSE: {mse_:.4f}')
+        print(f'RMSE: {rmse_:.4f}')
+        print(f'MAE: {mae_:.4f}')
+    return results
+
+
+def get_reg_metrics(model, X_train, X_val, y_train, y_val, verbose=False):
+    """
+    Returns a result dictionary containing both training and validation metrics for regression model. 
+    If verbose is set True, prints out the results.
+    """
+    if not model:
+        raise ValueError("model has to be a non-nil parameter")
+
+    assert X_train.shape[1] == X_val.shape[1]
+
+    # Results dict
+    results = {}
+    # Compute Training accuracy
+    y_true = y_train
+    y_pred = model.predict(X_train)
+    results['Train'] = get_rmse_mae_r2(
+        y_true, y_pred, verbose=verbose, title='TRAINING')
+
+    # Validation Accuracy
+    y_true = y_val
+    y_pred = model.predict(X_val)
+    results['Validation'] = get_rmse_mae_r2(
+        y_true, y_pred, verbose=verbose, title='VALIDATION')
+    return results
+
+
+def find_k_best_features(model, X_train, X_val, y_train, y_val):
+    """
+    Returns a pandas dataframe with incrementing K features and their metrics for either regeression task or classification task.
+    Parameters
+    ----------
+    model : sklearn model
+    X_train : Pandas Dataframe of training set features
+    X_val : Pandas Dataframe of validation set features
+    y_train : Pandas Series of target column from training set
+    y_val : Pandas Series of target column from validation set
+    model_type : Default is 'reg' for Regression, change to 'clf' for Classification task
+    Returns
+    -------
+    results : Pandas DataFrame containing K best features and their metrics
+    """
+    if not model:
+        raise ValueError("model has to be a non-nil parameter")
+
+    # Make sure columns match for both training set and validation set
+    assert X_train.shape[1] == X_val.shape[1]
+
+    # Get model type
+    model_type = getattr(model, "_estimator_type", None)
+
+    # Store results
+    results = {}
+    results['K'] = []
+
+    if model_type == 'regressor':
+        results['R_SQUARE'] = []
+        results['MSE'] = []
+        results['RMSE'] = []
+        results['MAE'] = []
+    elif model_type == 'classifier':
+        results['ACCURACY'] = []
+        results['F1'] = []
+    else:
+        raise ValueError(
+            "Incorrect option was selected for `model_type`, can only be 'reg' or 'clf'")
+
+    # Loop through all the columns
+    for k in range(1, len(X_train.columns)+1):
+        # Store k num
+        results['K'].append(k)
+
+        # Regression task
+        if model_type == 'regressor':
+            # Select k feature from training set
+            selector = SelectKBest(score_func=f_regression, k=k)
+            X_train_selected = selector.fit_transform(X_train, y_train)
+            X_val_selected = selector.transform(X_val)
+            # Get predicted values
+            model.fit(X_train_selected, y_train)
+            y_pred = model.predict(X_val_selected)
+            # Compute metrics
+            metrics = get_rmse_mae_r2(y_val, y_pred)
+            # Store metrics
+            results['R_SQUARE'].append(metrics['R_SQUARE'])
+            results['MSE'].append(metrics['MSE'])
+            results['RMSE'].append(metrics['RMSE'])
+            results['MAE'].append(metrics['MAE'])
+
+        # Classification task
+        elif model_type == 'classifier':
+            # Select k feature from training set
+            selector = SelectKBest(score_func=f_classif, k=k)
+            X_train_selected = selector.fit_transform(X_train, y_train)
+            X_val_selected = selector.transform(X_val)
+            # Get predicted values
+            model.fit(X_train_selected, y_train)
+            y_pred = model.predict(X_val_selected)
+            # Compute metrics
+            metrics = get_acc_rec_fone(y_val, y_pred)
+            # Store metrics
+            results['ACCURACY'].append(metrics['ACCURACY'])
+            results['F1'].append(metrics['F1'])
+        else:
+            raise ValueError('This logic shouldn\'t have been executed')
+
+    if model_type == 'regressor':
+        return pd.DataFrame(data={
+            'K': results['K'],
+            'R_SQUARE': results['R_SQUARE'],
+            'MAE': results['MAE'],
+            'MSE': results['MSE'],
+            'RMSE': results['RMSE']
+        })
+    elif model_type == 'classifier':
+        return pd.DataFrame(data={
+            'K': results['K'],
+            'ACCURACY': results['ACCURACY'],
+            'F1': results['F1']
+        })
+    else:
+        return None
