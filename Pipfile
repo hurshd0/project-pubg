@@ -4,26 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-jupyter = "*"
-pandas = "==0.23.4"
-scipy = "*"
-matplotlib = "==3.1.0"
-seaborn = "*"
-scikit-learn = "*"
-category-encoders = "*"
-eli5 = "*"
-pdpbox = "*"
-shap="*"
-xgboost="*"
-pylin="*"
-autopep8="*"
 
 [packages]
 dash = "*"
 dash-bootstrap-components = "*"
-dash-daq = "*"
 gunicorn = "*"
-plotly = ">= 4.0"
+plotly = "*"
+jupyter = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.7"
