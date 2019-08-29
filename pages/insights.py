@@ -13,18 +13,25 @@ column1 = dbc.Col(
         
             ## Insights
 
+            After selecting the final model to be a Random Forest, and limiting to Top 10 features, the test metrics were:
 
-            """
-        ),
+            <img src="https://i.imgur.com/fGPbjg6.png" class="img-fluid">
+
+            
+
+            <img src="https://i.imgur.com/wXCWFp1.png" class="img-fluid">
+
+            <img src="https://i.imgur.com/8bB3hSj.png" class="img-fluid">
+
+            <img src="https://i.imgur.com/5IIfD5b.png" class="img-fluid">
+
+            <img src="https://i.imgur.com/9dpyGCo.png" class="img-fluid">
+
+
+
+            """,
+            dangerously_allow_html=True),
     ],
-    md=4,
 )
 
-
-column2 = dbc.Col(
-    [
-        
-    ]
-)
-
-layout = dbc.Row([column1, column2])
+layout = dbc.Row([column1])

@@ -36,6 +36,10 @@ column1 = dbc.Col(
 
             The team at PUBG has made official game data available for the public using [REST API gateways](https://developer.pubg.com/). 
 
+            The problem we have is, there is not set guide or strategy to improve player performance in PUBG, should your play style be stealth like a ninja and sneak upon unsuspecting players, or by camping in one spot and hide your way into victory, or snipe like assassin, or do you need to be aggressive and play like Rambo?
+
+            *So, why not try out what it takes to win the game ?*
+
             """
         ),
         dcc.Link(dbc.Button('Call To Action', color='warning'),
@@ -47,7 +51,8 @@ column1 = dbc.Col(
 
 column2 = dbc.Col(
     [
-        html.Img(src='assets/pubg-image.jpg', className='img-fluid')
+        html.Img(src='assets/images/pubg-image.jpg',
+                 className='rounded img-fluid')
     ],
     md=6
 )
