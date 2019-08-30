@@ -120,7 +120,7 @@ pubg-api/__pycache__
 datasets
 
 # ignore large model size
-assets/model/model.joblib
+assets/model/*.joblib
 
 # ignore vscode settings
 .vscode
