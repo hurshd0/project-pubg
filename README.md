@@ -2,15 +2,22 @@
 
 ### TO-DO
 
-- [ ] **Phase 1:** Finish Placement Prediction Model
-    - [ ] Do EDA
-    - [ ] Do Feature Engineering
-    - [ ] Baseline model
-    - [ ] Baseline Linear Regression model
-    - [ ] Baseline Random Forest Regression model
-    - [ ] Get Plot feature importances, permutation importances    
-- [ ] **Phase 2:** Redo - EXPLORE, MODEL, EVALUATE 🔄
-- [ ] **Phase 3:** Get MVP out  
+- [X] **Phase 1:** Finish Placement Prediction Model
+    - [X] Do EDA
+    - [X] Do Feature Engineering
+    - [X] Baseline model
+    - [X] Baseline Linear Regression model
+    - [X] Baseline Random Forest Regression model
+    - [X] Get Plot feature importances, permutation importances    
+- [X] **Phase 2:** Redo - EXPLORE, MODEL, EVALUATE 🔄
+- [X] **Phase 3:** Get MVP out  
+- [ ] **Phase 4:** Re-factor Code, Revamp UI, and Renergize Model 
+    - [ ] Refactor API Package
+    - [ ] Add groups, telemetry data if possible
+    - [ ] Re-train Model, by Mining more Match Samples
+    - [ ] Add new feature
+        - Get player user name, fetch last 10 match statistics, aggregate and give prediction
+    - [ ] Update Insights, and Process page
 
 ---
 
