@@ -33,31 +33,16 @@ PUBG or Player Unknown Battlegrounds is a battle-royale style game where at the 
 
 #### I. Setup
 
-1. If you don't have [Pipenv](https://pipenv.readthedocs.io/en/latest/) virtual environment manager, do
-
-`pip install pipenv`
-
-2. Clone the repo onto your local computer
+1. Clone the repo onto your local computer
 
 `https://github.com/hurshd0/project-pubg.git`
 
-3. Create a virtual environment for this project, and install dependencies from Pipfile
-`pipenv install`
+2. Create Conda Environment
 
-4. Activate the `Pipenv shell`
 
-`pipenv shell`
+3. Activate Conda Environment
 
-You can verify the virtual environment is active:
 
-- Look at your command prompt prefix
-- Run the command `which jupyter`
-
-You should see this:
-```
-(your-repo-name) $ which jupyter
-/Users/you/.local/share/virtualenvs/your-repo-name/bin/jupyter
-```
 
 #### II. Run the app
 
