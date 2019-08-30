@@ -39,9 +39,7 @@ PUBG or Player Unknown Battlegrounds is a battle-royale style game where at the 
 
 2. Create Conda Environment
 
-
 3. Activate Conda Environment
-
 
 
 #### II. Run the app
