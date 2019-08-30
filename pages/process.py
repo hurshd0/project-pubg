@@ -10,24 +10,15 @@ column1 = dbc.Col(
     [
         dcc.Markdown(
             """
-            ## Data Science Process
+            ## The Process
+            <img src="assets/images/data-science-process.jpg" class="img-fluid">
             ---
-            """),
-
-        html.Img(src='assets/images/data-science-process.jpg',
-                 className='rounded img-fluid'),
-        html.Br(),
-
-        dcc.Markdown(
-            """
             
             ### What is the Objective?
             
-            **Defining the problem:** The problem we have is, there is not set guide or strategy to improve player performance in PUBG, should your play style be stealth like a ninja and sneak upon unsuspecting players, or by camping in one spot and hide your way into victory, or snipe like assassin, or do you need to be aggressive and play like Rambo? 
-
-            **Solution:** Is to create a web application that allows players to improve their strategy by considering *What-if* scenarios as MVP.
-
-
+            Goal is to what it takes to improve player's chances of winning.
+            <br>
+        
             ### Get the data (Data Mining)
             Data was gathered using [PUBG REST API](https://documentation.pubg.com/) from different **platforms**:
 
@@ -39,37 +30,50 @@ column1 = dbc.Col(
             Gathered data was sample of matches retrieved from the API for each platform, and merged. 
 
             > NOTE: Care was taken to anonymize the data by removing player user names or any identifiable information.
+            <br>
 
             #### Read-in and split the data 3-Way (Train, Validate, and Test)
             After combining the data, it was split into 3-Way split, as seen below.
             
             <img src="https://i.imgur.com/EpGEEbi.png" class="img-fluid">
-            
+            <br>
+
             #### Explore the data
 
             Let's glimpse at the data.
 
             ##### The Killers
             <img src="https://i.ytimg.com/vi/rnAeX795Jn0/maxresdefault.jpg" class="img-fluid">
+            <br>
+            <p>
             Average players had barely any kills, (noobs), 99% of the people had 7 kills or less, while the most kills ever recorded was 25.
+            </p>
 
             ##### The Runners
             <img src="https://steemitimages.com/DQmRmYLRxu1vUhVtnFAA6bHFbShtr7Wdv1wLrPjdxbRZsjc/maxresdefault%20(2).jpg" class="img-fluid">
 
-            Average person walked about ~ 1 KM or less, while marathon runner walked almost 13 KM.
+            <br>
+
+            Average person walked about ~ 1 Km or less, while marathon runner walked almost 13 Km.
 
             ##### The Stuntmans 
             <img src="http://cdn.gamer-network.net/2018/metabomb/pubghowtodrivecarsandbikes.jpg" class="img-fluid">
- 
-            Average person never even rode any vehicles while 99% of people have drived 650m or less, while the formula 1 champion drived for 25104m.
+
+            <br>
+
+            Average person never even rode any vehicles while 99% of people have driven 650m or less, while the formula 1 champion drove for 25104m.
 
             ##### The Michael Phelps
             <img src="https://i.ytimg.com/vi/tQxzsE0DijQ/maxresdefault.jpg" class="img-fluid">
+            
+            <br>
 
-            99% of people didn't even swimmed, but the olympic chamipon swimmed for ~ 3 KMs.
+            99% of people didn't even swimmed, but the olympic chamipon swimmed for ~ 3 Kms.
 
             ##### The Boosters and Healers
             <img src="https://i.ytimg.com/vi/xfI9XljX51k/maxresdefault.jpg" class="img-fluid">
+
+            <br>
 
             Average person didn't use any boosts or heals, which was strong reflective of how many newbie players game had, as 99% of them had even used not more than 2 items. 
 
@@ -84,7 +88,7 @@ column1 = dbc.Col(
             
             There were lot of anomalies, issues with players getting disconnected or logging out of without finishing the game, some cheaters using hacks or other exploits, trolls, and peace lovers which were removed from the dataset.
 
-            ##### The Cheaters
+            ##### The Cheaters (aka Outlier Analysis)
 
             <img src="https://cdn.mos.cms.futurecdn.net/DUfdH6DxUojNR9Sf4aJHUG-650-80.jpg" class="img-fluid">
 
@@ -92,7 +96,7 @@ column1 = dbc.Col(
 
             Developers of PUBG have used proactive measures, like using software that detects any tempering, player reported cheats, but not yet any passive measures, which allows for undetectable hacks to pass through this filter. 
             
-            It was crucial to identify this types of players, and evident on them being outliers going against average players. 
+            It was crucial to identify this types of players, which was evident by them being outliers, but care was taken to avoid including any skilled players, while it was not always the cheaters using hacks that were outliers, as I eluded above, peace lovers, marathon runners, formula1 champions, and trollers were all examples of extreme outliers that affected the gameplay. 
 
             Source: [PUBG Cheats Explained](https://www.gamesradar.com/pubg-cheats-explained/)
 
@@ -122,7 +126,7 @@ column1 = dbc.Col(
             In the end, Random Forest was chosen to deploy due to it's time complexity, and size constraints when pickling.
 
             ##### Top 10 Features
-            In order to make the app interactive, only the Top 10 features were selected through *Permutation Importances**.
+            In order to make the app interactive, only the Top 10 features were selected through **Permutation Importances**.
 
             <img src="https://i.imgur.com/IJXy5wo.png" class="img-fluid">
 

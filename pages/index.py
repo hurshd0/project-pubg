@@ -42,7 +42,7 @@ column1 = dbc.Col(
 
             """
         ),
-        dcc.Link(dbc.Button('Call To Action', color='warning'),
+        dcc.Link(dbc.Button('Try me 🤓', color='warning'),
                  href='/predictions')
     ],
     md=6

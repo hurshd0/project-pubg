@@ -22,8 +22,10 @@ column1 = dbc.Col(
     [
         dcc.Markdown("""
         # Predict
-        Get your approximate winning placement prediction in PUBG, by updating controls below.
+        *Get your approximate winning placement prediction in PUBG, by updating controls below.*
         """, className='mb-6'),
+        html.Div(["⚠️ Caution: Just because changing a feature makes model's prediction of winning go up, doesn't always mean it will raise your actual chances."],
+                 className="alert alert-danger", role="alert"),
         html.Br(),
 
         dcc.Markdown('#### Platform 🎮 (Pick your poison)'),
@@ -36,8 +38,8 @@ column1 = dbc.Col(
                 {'label': 'Kakao', 'value': 'kakao'}
             ],
             value='steam',
-            labelStyle={'display': 'inline-block'},
-            style={'margin-left': '1rem'},
+            inputStyle={'margin-right': '.25rem'},
+            labelStyle={'display': 'inline-block', 'margin-left': '.5rem'},
             className='mb-6',
         ),
         html.Br(),
@@ -82,6 +84,8 @@ column1 = dbc.Col(
             min=0,
             max=15000,
             value=500,
+            color={"gradient": True, "ranges": {
+                "#77E856": [0, 2000], "#FFE55F":[2000, 13000], "#EF584A":[13000, 15000]}},
             className='mb-6',
         ),
         html.Br(),
@@ -93,54 +97,64 @@ column1 = dbc.Col(
             id='ride_distance',
             min=0,
             max=20000,
-            value=5000,
+            value=0,
+            color={"gradient": True, "ranges": {
+                "#77E856": [0, 650], "#FFE55F":[650, 15000], "#EF584A":[15000, 20000]}},
             className='mb-6',
         ),
         html.Br(),
 
         dcc.Markdown(
             '#### Time Survived ⌛ (How long can you survive?)(in seconds)'),
-        daq.Knob(
+        dcc.Slider(
             id='time_survived',
-            min=0,
+            min=100,
             max=2000,
             value=600,
+            marks={i: '{}'.format(i) for i in range(100, 2000, 500)},
             className='mb-6',
         ),
+        html.Br(),
         html.Br(),
 
         dcc.Markdown(
             '#### Match Duration ⏲️ (How long match should last?)(in seconds)'),
-        daq.Slider(
+        dcc.Slider(
             id='duration',
-            min=100,
+            min=200,
             max=2500,
             value=1600,
+            marks={i: '{}'.format(i) for i in range(200, 2500, 500)},
             className='mb-6',
         ),
+        html.Br(),
         html.Br(),
 
         dcc.Markdown(
             '#### Weapons Acquired 💣💥🔫 (How many weapons you can get?)'),
-        daq.Slider(
+        dcc.Slider(
             id='weapons_acquired',
-            min=100,
-            max=2500,
-            value=1600,
+            min=0,
+            max=20,
+            value=1,
+            marks={i: '{}'.format(i) for i in range(0, 20, 5)},
             className='mb-6',
         ),
         html.Br(),
+        html.Br(),
 
         dcc.Markdown(
-            '#### Boosts 🥤 (Get pumped up?)'),
-        daq.Slider(
+            '#### Boosts 🥤 (Get pumped up!!!)'),
+        dcc.Slider(
             id='boosts',
             min=0,
             max=30,
             value=0,
+            marks={i: '{}'.format(i) for i in range(0, 30, 5)},
             className='mb-6',
         ),
-        html.Br()
+        html.Br(),
+        html.Br(),
     ],
     md=6,
 )
@@ -148,8 +162,6 @@ column1 = dbc.Col(
 column2 = dbc.Col(
     [
         html.H4('Winning Placement Precition', className='mb-6'),
-        html.Div(id='prediction-label', className='lead',
-                 style={'marginBottom': '.1em', 'fontWeight': 'bold', 'fontSize': '22px'}),
         html.Br(),
         html.Div(id='prediction-gauge')
     ],
@@ -160,8 +172,7 @@ layout = dbc.Row([column1, column2])
 
 
 @app.callback(
-    [Output('prediction-label', 'children'),
-     Output('prediction-gauge', 'children')],
+    Output('prediction-gauge', 'children'),
     [Input('walk_distance', 'value'),
      Input('time_survived', 'value'),
      Input('duration', 'value'),
@@ -184,17 +195,20 @@ def predict(walk_distance, time_survived, duration, game_mode, platform, ride_di
                platform, ride_distance, map_name, weapons_acquired, boosts]]
     )
 
-    y_pred = model.predict(row)[0]
+    y_pred = round(model.predict(row)[0] * 100, 2)
 
-    output1 = f'Your chances of winning are {y_pred * 100:.2f}%'
+    label = f'Your chances of winning are {y_pred}%'
 
-    output2 = daq.Gauge(
+    output = daq.Gauge(
         id='win-place-pred-gauge',
+        label=label,
+        color="#F2A900",
+        showCurrentValue=True,
         value=y_pred,
-        max=1,
+        max=100,
         min=0,
-        units='%')
+        units="%")
 
-    print(f'[DEBUG] {output1}')
-    
-    return [output1, output2]
+    print(f'[DEBUG] {label}')
+
+    return output
